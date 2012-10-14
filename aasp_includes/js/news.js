@@ -2,14 +2,14 @@ function postNews() {
 	var title = document.getElementById("news_title").value;
 	var author = document.getElementById("news_author").value;
 	var content = document.getElementById("wysiwyg").value;
-	
+
 	var image = document.getElementById("news_image").value;
 	content = content.replace(/&nbsp;/, '').replace(/<br>/, '\n');
 	showLoader();
 	$.post("../aasp_includes/scripts/news.php", { function: "post", title: title, author: author, content: content,image: image },
        function(data) {
-			 $("#loading").html(data + "<br/><br/><a href='#' onclick='hideLoader()'>Close</a>"); 
-		 
+			 $("#loading").html(data + "<br/><br/><a href='#' style='color: black' onclick='hideLoader()'>Close</a>");
+
    });
 }
 function deleteNews(id) {
@@ -24,7 +24,7 @@ function deleteNewsNow(id) {
        function(data) {
 			 window.location='?p=news&s=manage';
    });
-	
+
 }
 
 function editNews(id) {
@@ -36,7 +36,7 @@ function editNews(id) {
 				$('#wysiwyg').wysiwyg();
 			});
        });
-	
+
 }
 function editNewsNow(id) {
 	var title = document.getElementById("editnews_title").value;
@@ -46,7 +46,12 @@ function editNewsNow(id) {
 	$("#loading").html("Loading...");
 	$.post("../aasp_includes/scripts/news.php", { function: "edit", id: id, title: title, content: content, author: author },
        function(data) {
-			 window.location=data;
+           if (data == 'success')
+           {
+               location.reload();
+               return;
+           }
+           $("#loading").html(data + "<br/><br/><a href='#' style='color: black' onclick='editNews(" + id + ")'>Back</a>");
    });
-   
+
 }
