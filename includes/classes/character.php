@@ -142,6 +142,17 @@ class character {
 	}
  }
  
+ public static function isAccountCharacter($char_guid, $acct_id)
+ {
+     $char_guid = (int)$char_guid;
+     $acct_id = (int)$acct_id;
+     $result = mysql_query("SELECT COUNT('guid') FROM characters WHERE guid='{$char_guid}' AND account = '{$acct_id}'");
+     if (mysql_result($result,0)==0) 
+         return FALSE;
+     else 
+         return TRUE;
+ }
+ 
  public static function isOnline($char_guid) 
  {
 	 $char_guid = (int)$char_guid;
