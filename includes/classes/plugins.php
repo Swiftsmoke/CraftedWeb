@@ -86,7 +86,7 @@ class plugins
 	
 	public static function load($type)
 	{
-		if($GLOBALS['enablePlugins']==true)
+		if($GLOBALS['enablePlugins']==true && isset($_SESSION['loaded_plugins_' . $type]))
 		{
 		  ##########################
 		  if($type == 'pages')

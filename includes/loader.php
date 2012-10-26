@@ -51,9 +51,6 @@ if($GLOBALS['maintainance']==TRUE && !in_array($_SERVER['REMOTE_ADDR'],$GLOBALS[
 
 
 require('includes/misc/connect.php'); //Load connection class
-$connect = new connect;
-
-$connect->connectToDB();
 
 require('includes/misc/func_lib.php'); 
 require('includes/misc/compress.php'); 
