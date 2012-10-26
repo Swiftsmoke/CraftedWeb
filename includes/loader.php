@@ -22,7 +22,10 @@
 require('includes/misc/headers.php'); //Load sessions, erorr reporting & ob.
 
 if(file_exists('install/index.php'))
+{
 	header("Location: install/index.php");
+    exit;
+}
 
 define('INIT_SITE', TRUE);
 
@@ -31,9 +34,11 @@ require('includes/configuration.php'); //Load configuration file
 if(isset($GLOBALS['not_installed']) && $GLOBALS['not_installed']==true)
 {
 	if(file_exists('install/index.php'))
+    {
 		header("Location: install/index.php");
-	else
-		exit('<b>Error</b>. It seems like your website is not yet installed, but no installer could be found!');	
+        exit;
+    }
+	exit('<b>Error</b>. It seems like your website is not yet installed, but no installer could be found!');	
 }
 
 if($GLOBALS['maintainance']==TRUE && !in_array($_SERVER['REMOTE_ADDR'],$GLOBALS['maintainance_allowIPs']))
@@ -112,6 +117,7 @@ if(isset($_SESSION['votingUrlID']) && $_SESSION['votingUrlID']!=0 && $GLOBALS['v
 	{
 		header('Location: index.php');
 		unset($_SESSION['votingUrlID']);
+        exit;
 	}
 	
 	//Update the points table.
@@ -121,6 +127,7 @@ if(isset($_SESSION['votingUrlID']) && $_SESSION['votingUrlID']!=0 && $GLOBALS['v
 	unset($_SESSION['votingUrlID']);
 	
 	header("Location: ?p=vote");
+    exit;
 }
 
 ###SESSION SECURITY###
@@ -130,9 +137,11 @@ if(!isset($_SESSION['last_ip']) && isset($_SESSION['cw_user']))
 elseif(isset($_SESSION['last_ip']) && isset($_SESSION['cw_user'])) 
 {
 	if($_SESSION['last_ip']!=$_SERVER['REMOTE_ADDR'])
+    {
 		header("Location: ?p=logout");
-	else
-		$_SESSION['last_ip']=$_SERVER['REMOTE_ADDR'];
+        exit;
+    }
+	$_SESSION['last_ip']=$_SERVER['REMOTE_ADDR'];
 }
 ?>
 

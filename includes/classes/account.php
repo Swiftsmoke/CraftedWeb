@@ -71,6 +71,8 @@ class account {
 					   header("Location: ".$last_page);
 					else
 					   header("Location: index.php");
+                       
+                    exit;
 				}
 			}
 
@@ -263,7 +265,10 @@ class account {
 	public static function isLoggedIn()
 	{
 		if (isset($_SESSION['cw_user']))
+        {
 			header("Location: ?p=account");
+            exit;
+        }
 	}
 
 
@@ -273,13 +278,19 @@ class account {
 	public static function isNotLoggedIn()
 	{
 		if (!isset($_SESSION['cw_user']))
+        {
 			header("Location: ?p=login&r=".$_SERVER['REQUEST_URI']);
+            exit;
+        }
 	}
 
 	public static function isNotGmLoggedIn()
 	{
 		if (!isset($_SESSION['cw_gmlevel']))
+        {
 			header("Location: ?p=home");
+            exit;
+        }
 	}
 
 

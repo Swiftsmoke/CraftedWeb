@@ -517,7 +517,8 @@ class page {
 		   if($GLOBALS['staffPanel_permissions'][$page]!=true) 
 		   {
 			 header("Location: ?p=notice&e=<h2>Not authorized!</h2>
-					You are not allowed to view this page!"); 
+					You are not allowed to view this page!");
+             exit;
 		   }
 	   }
    }

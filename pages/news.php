@@ -99,6 +99,7 @@ if (isset($_GET['newsid']))
 			}	
 			
 			header("Location: ?p=news&newsid=".$id);
+            exit;
 		}
 	}
 	
