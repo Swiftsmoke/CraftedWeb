@@ -87,6 +87,7 @@ if(isset($_POST['convert'])) {
 		account::logThis("Converted ".$vp." Vote Points into ".$dp." ".$GLOBALS['donation']['coins_name'],"currencyconvert",NULL);
 		
 		header("Location: ?p=convert");
+        exit;
 	}
 }
 ?>

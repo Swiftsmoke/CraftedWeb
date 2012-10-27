@@ -22,6 +22,7 @@
 	if($GLOBALS['playersOnline']['enablePage']!=true)
 	{
 		header("Location: ?p=account");
+        exit;
 	}
 	connect::selectDB('webdb');
 	$result = mysql_query("SELECT id,name FROM realms WHERE id='".$GLOBALS['playersOnline']['realm_id']."'");
